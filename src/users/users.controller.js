@@ -48,12 +48,12 @@ class UsersController {
             const user = await db.doc(id).get();
 
             if (!user.exists) {
-                const error = new Error(`User with "${id}" does not exists`);
+                const error = new Error(`User with id: "${id}" does not exists`);
                 error.code = 404;
                 throw error;
             }
 
-            return res.send({ data: user.data() });
+            return res.send({ ...user.data() });
         } catch (err) {
             next(err);
         }
